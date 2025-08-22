@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Aula 17</title>
+    <style>
+        #container {
+            margin-top: 20px;
+        }
+
+        li {
+            margin: 4px 0;
+            list-style: "👉 ";
+            color: darkred;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="meuBotao">Clique aqui!!</button>
+    <div id="container">
+        <ul id="lista"></ul>
+    </div>
+
+    <script>
+        let contador = 1;
+        const botao = document.getElementById('meuBotao');
+        const lista = document.getElementById('lista');
+
+        botao.addEventListener('click', () => {
+            let item = document.createElement('li');
+            item.textContent = `Elemento número ${contador}`;
+            lista.appendChild(item);
+            contador++;
+        });
+    </script>
+</body>
+
+</html>

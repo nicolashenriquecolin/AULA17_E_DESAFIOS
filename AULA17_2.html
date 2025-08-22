@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulta CEP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #resultado {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Consultar CEP</h1>
+    <form id="formCEP">
+        <input type="text" id="cepInput" placeholder="Digite o CEP" maxlength="8">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        const form = document.getElementById('formCEP');
+        const resultado = document.getElementById('resultado');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const cep = document.getElementById('cepInput').value.replace(/\D/g, '');
+            if (!cep) {
+                resultado.textContent = "Por favor, digite um CEP válido.";
+                return;
+            }
+
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(res => res.json())
+                .then(dados => {
+                    if (dados.erro) {
+                        resultado.textContent = "CEP não encontrado.";
+                    } else {
+                        resultado.innerHTML = `
+                            <strong>Logradouro:</strong> ${dados.logradouro} <br>
+                            <strong>Bairro:</strong> ${dados.bairro} <br>
+                            <strong>Cidade:</strong> ${dados.localidade} - ${dados.uf}
+                        `;
+                    }
+                })
+                .catch(() => {
+                    resultado.textContent = "Erro ao buscar o CEP.";
+                });
+        });
+    </script>
+</body>
+</html>

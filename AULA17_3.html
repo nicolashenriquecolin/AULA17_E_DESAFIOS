@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .app {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px;
+        }
+        .profile-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            width: 200px;
+            background: linear-gradient(135deg, #fdfdfd, #f1f1f1);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .profile-card:hover {
+            transform: scale(1.05);
+        }
+        h2 {
+            color: #222;
+            margin: 0 0 8px 0;
+        }
+        p {
+            color: #555;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="app" id="app"></div>
+
+    <script>
+        const perfis = [
+            { nome: "Nicolas", cargo: "Desenvolvedora Frontend" },
+            { nome: "Lucas", cargo: "Designer UI/UX" },
+            { nome: "Marina", cargo: "Engenheira de Software" },
+            { nome: "João", cargo: "Product Manager" }
+        ];
+
+        const app = document.getElementById('app');
+
+        perfis.forEach(perfil => {
+            const card = document.createElement('div');
+            card.className = 'profile-card';
+
+            card.innerHTML = `
+                <h2>${perfil.nome}</h2>
+                <p>${perfil.cargo}</p>
+            `;
+
+            app.appendChild(card);
+        });
+    </script>
+</body>
+</html>

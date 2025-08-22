@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Usuários</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    #user-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 0;
+      list-style: none;
+      justify-content: center;
+    }
+
+    #user-list li {
+      background: #fff;
+      border-radius: 10px;
+      padding: 15px 20px;
+      min-width: 200px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    #user-list li:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    #user-list li strong {
+      color: #2c3e50;
+      font-size: 18px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    #user-list li span {
+      color: #7f8c8d;
+      font-size: 14px;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Lista de Usuários</h2>
+  <ul id="user-list"></ul>
+
+  <script>
+    const userList = document.getElementById("user-list");
+
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(res => res.json())
+      .then(usuarios => {
+        const nomesBrasileiros = [
+          { nome: "João Silva", email: "joao.silva@email.com" },
+          { nome: "Maria Oliveira", email: "maria.oliveira@email.com" },
+          { nome: "Carlos Souza", email: "carlos.souza@email.com" },
+          { nome: "Ana Pereira", email: "ana.pereira@email.com" },
+          { nome: "Pedro Almeida", email: "pedro.almeida@email.com" },
+          { nome: "Juliana Santos", email: "juliana.santos@email.com" },
+          { nome: "Rafael Costa", email: "rafael.costa@email.com" },
+          { nome: "Fernanda Lima", email: "fernanda.lima@email.com" },
+          { nome: "Bruno Rocha", email: "bruno.rocha@email.com" },
+          { nome: "Camila Ribeiro", email: "camila.ribeiro@email.com" }
+        ];
+
+        usuarios.forEach((usuario, i) => {
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <strong>${nomesBrasileiros[i].nome}</strong>
+            <span>${nomesBrasileiros[i].email}</span>
+          `;
+          userList.appendChild(li);
+        });
+      })
+      .catch(() => {
+        userList.innerHTML = "<li>Erro ao carregar usuários.</li>";
+      });
+  </script>
+</body>
+
+</html>
